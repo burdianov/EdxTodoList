@@ -21,14 +21,14 @@ public class TodoListDBHelper extends SQLiteOpenHelper {
         // Create a table to hold to-do.  A to-do is a task that need to be completed.
 
         final String SQL_CREATE_TODO_TABLE = "CREATE TABLE " + TodoEntry.TABLE_NAME + " (" +
-											 TodoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-											 TodoEntry.COLUMN_DATETEXT + " INTEGER, " +
-											 TodoEntry.COLUMN_DESC + " TEXT NOT NULL, " +
-											 TodoEntry.COLUMN_DUE_DATE_TEXT + " INTEGER, " +
-											 TodoEntry.COLUMN_DONE + " INTEGER, " +
-											 "UNIQUE (" + TodoEntry.COLUMN_DESC + ", " + TodoEntry.COLUMN_DATETEXT + ") ON " +
-											 "CONFLICT IGNORE" +
-											 " );";
+                TodoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                TodoEntry.COLUMN_DATETEXT + " INTEGER, " +
+                TodoEntry.COLUMN_DESC + " TEXT NOT NULL, " +
+                TodoEntry.COLUMN_DUE_DATE_TEXT + " INTEGER, " +
+                TodoEntry.COLUMN_DONE + " INTEGER, " +
+                "UNIQUE (" + TodoEntry.COLUMN_DESC + ", " + TodoEntry.COLUMN_DATETEXT + ") ON " +
+                "CONFLICT IGNORE" +
+                " );";
 
         sqLiteDatabase.execSQL(SQL_CREATE_TODO_TABLE);
     }

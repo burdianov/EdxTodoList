@@ -11,7 +11,7 @@ import android.net.Uri;
 import com.crackncrunch.edxtodolist.data.TodoListContract.TodoEntry;
 
 public class TodoListProvider extends ContentProvider {
-    private static final int TODO    = 100;
+    private static final int TODO = 100;
     private static final int TODO_ID = 101;
 
     // The URI Matcher used by this content provider.
@@ -44,7 +44,7 @@ public class TodoListProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-						String sortOrder) {
+                        String sortOrder) {
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
         Cursor retCursor;
@@ -52,26 +52,26 @@ public class TodoListProvider extends ContentProvider {
             // "to-do"
             case TODO: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-						TodoEntry.TABLE_NAME,
-						projection,
-						selection,
-						selectionArgs,
-						null,
-						null,
-						sortOrder
+                        TodoEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
                 );
                 break;
             }
             // "tod-o by id/*"
             case TODO_ID: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-						TodoListContract.TodoEntry.TABLE_NAME,
-						projection,
-						TodoListContract.TodoEntry._ID + " = '" + ContentUris.parseId(uri) + "'",
-						null,
-						null,
-						null,
-						sortOrder
+                        TodoListContract.TodoEntry.TABLE_NAME,
+                        projection,
+                        TodoListContract.TodoEntry._ID + " = '" + ContentUris.parseId(uri) + "'",
+                        null,
+                        null,
+                        null,
+                        sortOrder
                 );
                 break;
             }
@@ -105,7 +105,7 @@ public class TodoListProvider extends ContentProvider {
         switch (match) {
             case TODO: {
                 long _id = db.insert(TodoEntry.TABLE_NAME, null, contentValues);
-                if ( _id > 0 )
+                if (_id > 0)
                     returnUri = TodoEntry.buildTodoUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -126,7 +126,7 @@ public class TodoListProvider extends ContentProvider {
         switch (match) {
             case TODO:
                 rowsDeleted = db.delete(
-						TodoEntry.TABLE_NAME, selection, selectionArgs);
+                        TodoEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -147,7 +147,7 @@ public class TodoListProvider extends ContentProvider {
         switch (match) {
             case TODO:
                 rowsUpdated = db.update(TodoEntry.TABLE_NAME, values, selection,
-										selectionArgs);
+                        selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -182,6 +182,5 @@ public class TodoListProvider extends ContentProvider {
             default:
                 return super.bulkInsert(uri, values);
         }
-
     }
 }
